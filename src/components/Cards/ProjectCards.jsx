@@ -121,14 +121,14 @@ const Avatar = styled.img`
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     border: 3px solid ${({ theme }) => theme.card};
 `
-
-const ProjectCards = ({project,setOpenModal}) => {
+const ProjectCards = ({ project, setOpenModal }) => {
+    console.log("project card detail "+JSON.stringify(project));
     return (
-        <Card onClick={() => setOpenModal({state: true, project: project})}>
-            <Image src={project.image}/>
+        <Card onClick={() => setOpenModal({ state: true, project: project })}>
+            <Image src={project.image.url} alt={project.title} />
             <Tags>
-                {project.tags?.map((tag, index) => (
-                <Tag>{tag}</Tag>
+                {project.techStack?.map((tag, index) => (
+                    <Tag key={index}>{tag}</Tag>
                 ))}
             </Tags>
             <Details>
@@ -137,13 +137,14 @@ const ProjectCards = ({project,setOpenModal}) => {
                 <Description>{project.description}</Description>
             </Details>
             <Members>
-                {project.member?.map((member) => (
-                    <Avatar src={member.img}/>
+                {project.member?.map((member, index) => (
+                    <Avatar key={index} src={member.img} alt={member.name} />
                 ))}
             </Members>
             {/* <Button>View Project</Button> */}
         </Card>
-    )
-}
+    );
+};
+
 
 export default ProjectCards

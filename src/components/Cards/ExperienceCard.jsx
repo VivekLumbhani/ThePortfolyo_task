@@ -1,5 +1,6 @@
-import React from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import styled from 'styled-components'
+import { DataContext } from "../../index";
 
 const Document = styled.img`
     display: none;
@@ -56,11 +57,11 @@ const Card = styled.div`
     }
 
     &:hover ${Document}{
-        display: flex;
+
     }
 
     &:hover ${Span}{
-        overflow: visible;
+
         -webkit-line-clamp: unset;
 
     }
@@ -145,6 +146,8 @@ const Skill = styled.div`
 
 
 const ExperienceCard = ({ experience }) => {
+    const data = useContext(DataContext);
+
     return (
         <Card>
             <Top>
@@ -156,15 +159,15 @@ const ExperienceCard = ({ experience }) => {
                 </Body>
             </Top>
             <Description>
-                {experience?.desc &&
-                    <Span>{experience?.desc}</Span>
+                {data?.user?.about?.description &&
+                    <Span>{data?.user?.about?.description}</Span>
 
                 }
                 {experience?.skills &&
                     <>
                         <br />
                         <Skills>
-                            <b>Skills:</b>
+                            <b>bulletPoints:</b>
                             <ItemWrapper>
                                 {experience?.skills?.map((skill, index) => (
                                     <Skill>• {skill}</Skill>

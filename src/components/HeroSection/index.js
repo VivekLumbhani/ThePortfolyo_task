@@ -1,11 +1,15 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import HeroBgAnimation from '../HeroBgAnimation'
 import { HeroContainer, HeroBg, HeroLeftContainer, Img, HeroRightContainer, HeroInnerContainer, TextLoop, Title, Span, SubTitle,SocialMediaIcons,SocialMediaIcon, ResumeButton } from './HeroStyle'
-import HeroImg from '../../images/HeroImage.jpg'
+
 import Typewriter from 'typewriter-effect';
 import { Bio } from '../../data/constants';
+import { DataContext } from "../../index";
 
 const HeroSection = () => {
+    const data = useContext(DataContext);
+    const userName = data?.user?.about?.name;
+
     return (
         <div id="about">
             <HeroContainer>
@@ -14,26 +18,20 @@ const HeroSection = () => {
                 </HeroBg>
                 <HeroInnerContainer >
                     <HeroLeftContainer id="Left">
-                        <Title>Hi, I am <br /> {Bio.name}</Title>
+                        <Title>Hi, I am <br /> {userName}</Title>
                         <TextLoop>
                             I am a
                             <Span>
-                                <Typewriter
-                                    options={{
-                                        strings: Bio.roles,
-                                        autoStart: true,
-                                        loop: true,
-                                    }}
-                                />
-                            </Span>
+                            {data?.user?.about?.title}
+                                                        </Span>
                         </TextLoop>
                         <SubTitle>{Bio.description}</SubTitle>
-                        <ResumeButton href={Bio.resume} target='display'>Check Resume</ResumeButton>
+
                     </HeroLeftContainer>
 
                     <HeroRightContainer id="Right">
 
-                        <Img src={HeroImg} alt="hero-image" />
+                        <Img src={data?.user?.about?.avatar.url} alt="hero-image" />
                     </HeroRightContainer>
                 </HeroInnerContainer>
 

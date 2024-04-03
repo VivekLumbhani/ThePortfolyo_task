@@ -1,11 +1,15 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { useState } from 'react'
 import { Container, Wrapper, Title, Desc, CardContainer, ToggleButtonGroup, ToggleButton, Divider } from './ProjectsStyle'
 import ProjectCard from '../Cards/ProjectCards'
 import { projects } from '../../data/constants'
+import { DataContext } from "../../index";
 
 
 const Projects = ({openModal,setOpenModal}) => {
+  
+
+const data = useContext(DataContext);
   const [toggle, setToggle] = useState('all');
   return (
     <Container id="projects">
@@ -40,14 +44,14 @@ const Projects = ({openModal,setOpenModal}) => {
           }
         </ToggleButtonGroup>
         <CardContainer>
-          {toggle === 'all' && projects
-            .map((project) => (
-              <ProjectCard project={project} openModal={openModal} setOpenModal={setOpenModal}/>
-            ))}
+        {data?.user?.projects?.map((project) => (
+            <ProjectCard key={project._id} project={project}  setOpenModal={project} />
+          ))}
+
           {projects
             .filter((item) => item.category == toggle)
             .map((project) => (
-              <ProjectCard project={project} openModal={openModal} setOpenModal={setOpenModal}/>
+              <ProjectCard project={project}  setOpenModal={setOpenModal}/>
             ))}
         </CardContainer>
       </Wrapper>

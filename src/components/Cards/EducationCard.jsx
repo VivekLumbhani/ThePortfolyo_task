@@ -1,5 +1,6 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import styled from 'styled-components'
+import { DataContext } from "../../index";
 
 const Document = styled.img`
     display: none;
@@ -127,8 +128,10 @@ const Grade = styled.div`
 `
 
 
-
 const EducationCard = ({ education }) => {
+    
+
+const data = useContext(DataContext);
     return (
         <Card>
             <Top>
@@ -136,10 +139,10 @@ const EducationCard = ({ education }) => {
                 <Body>
                     <Name>{education.school}</Name>
                     <Degree>{education.degree}</Degree>
-                    <Date>{education.date}</Date>
+
                 </Body>
             </Top>
-            <Grade><b>Grade: </b>{education.grade}</Grade>
+            <Grade><b>Position: </b>{education.grade}</Grade>
             <Description>
                 <Span>{education.desc}</Span>
             </Description>

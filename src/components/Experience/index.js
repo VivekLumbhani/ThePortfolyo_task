@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React,{useState,useContext} from 'react'
 import styled from 'styled-components'
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -9,6 +9,7 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import ExperienceCard from '../Cards/ExperienceCard';
 import { experiences } from '../../data/constants';
+import { DataContext } from "../../index";
 
 const Container = styled.div`
     display: flex;
@@ -75,7 +76,12 @@ const TimelineSection = styled.div`
 
 
 const index = () => {
+    
+    
+
+
     return (
+        
         <Container id="experience">
             <Wrapper>
                 <Title>Experience</Title>
@@ -84,7 +90,9 @@ const index = () => {
                 </Desc>
                 <TimelineSection>
                     <Timeline>
-                        {experiences.map((experience,index) => (
+                    {
+                        
+                        experiences.map((experience,index) => (
                             <TimelineItem>
                                 <TimelineSeparator>
                                     <TimelineDot variant="outlined" color="secondary" />
